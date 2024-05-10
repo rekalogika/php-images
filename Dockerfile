@@ -1,5 +1,5 @@
 ARG PHP_VERSION=8.3
-ARG COMPOSER_VERSION=2.7.1
+ARG COMPOSER_VERSION=2.7.6
 ARG NODE_MAJOR=20
 ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip redis amqp"
 ARG PHP_EXTENSIONS
