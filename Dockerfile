@@ -28,7 +28,7 @@ ARG INSTALL_PHP_EXTENSION_URL
 ENV INSTALL_PHP_EXTENSION_URL "${INSTALL_PHP_EXTENSION_URL}"
 ENV PHP_EXTENSIONS "${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
 ENV DOCUMENT_ROOT /srv/app/public
-ENV SYMFONY_CLI_URL 'https://github.com/symfony-cli/symfony-cli/releases/v${SYMFONY_VERSION}/download/symfony-cli_linux_amd64.tar.gz'
+ENV SYMFONY_CLI_URL "https://github.com/symfony-cli/symfony-cli/releases/v${SYMFONY_VERSION}/download/symfony-cli_linux_amd64.tar.gz"
 ENV APT_PACKAGES "${APT_PACKAGES}"
 ENV COMPOSER_VERSION "${COMPOSER_VERSION}"
 
@@ -96,7 +96,7 @@ ARG INSTALL_PHP_EXTENSION_URL
 ENV INSTALL_PHP_EXTENSION_URL "${INSTALL_PHP_EXTENSION_URL}"
 ENV PHP_EXTENSIONS "${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
 ENV DOCUMENT_ROOT /srv/app/public
-ENV SYMFONY_CLI_URL 'https://github.com/symfony-cli/symfony-cli/releases/v${SYMFONY_VERSION}/download/symfony-cli_linux_amd64.tar.gz'
+ENV SYMFONY_CLI_URL "https://github.com/symfony-cli/symfony-cli/releases/v${SYMFONY_VERSION}/download/symfony-cli_linux_amd64.tar.gz"
 ENV APT_PACKAGES "${APT_PACKAGES}"
 ENV COMPOSER_VERSION "${COMPOSER_VERSION}"
 
