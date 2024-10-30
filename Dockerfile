@@ -1,8 +1,8 @@
-ARG PHP_VERSION=8.3.10
-ARG COMPOSER_VERSION=2.7.7
-ARG SYMFONY_VERSION=5.10.2
+ARG PHP_VERSION=8.3.13
+ARG COMPOSER_VERSION=2.8.2
+ARG SYMFONY_VERSION=5.10.4
 ARG NODE_MAJOR=20
-ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp"
+ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl"
 ARG PHP_EXTENSIONS
 ARG APT_PACKAGES="acl cron sudo procps gettext tini mkcert p7zip unzip git nodejs ca-certificates curl gnupg"
 ARG DEBIAN_CODENAME=bullseye
