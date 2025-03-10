@@ -2,7 +2,7 @@ ARG PHP_VERSION=8.3.17
 ARG COMPOSER_VERSION=2.8.6
 ARG SYMFONY_VERSION=5.11.0
 ARG NODE_MAJOR=20
-ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl redis"
+ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl"
 ARG PHP_EXTENSIONS
 ARG APT_PACKAGES="acl cron sudo procps gettext tini mkcert p7zip unzip git nodejs ca-certificates curl gnupg"
 ARG DEBIAN_CODENAME=bullseye
@@ -52,6 +52,7 @@ RUN set -eux ; \
 	curl -sSLf -o '/usr/bin/install-php-extensions' $INSTALL_PHP_EXTENSION_URL ; \
 	chmod +x '/usr/bin/install-php-extensions' ; \
 	install-php-extensions $PHP_EXTENSIONS ; \
+	install-php-extensions redis-^5 ; \
 	true
 
 # install composer
@@ -120,6 +121,7 @@ RUN set -eux ; \
 	curl -sSLf -o '/usr/bin/install-php-extensions' $INSTALL_PHP_EXTENSION_URL ; \
 	chmod +x '/usr/bin/install-php-extensions' ; \
 	install-php-extensions $PHP_EXTENSIONS ; \
+	install-php-extensions redis-^5 ; \
 	true
 
 # install composer
