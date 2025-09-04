@@ -1,11 +1,11 @@
-ARG PHP_VERSION=8.3.17
-ARG COMPOSER_VERSION=2.8.6
-ARG SYMFONY_VERSION=5.11.0
+ARG PHP_VERSION=8.4.12
+ARG COMPOSER_VERSION=2.8.11
+ARG SYMFONY_VERSION=5.12.0
 ARG NODE_MAJOR=20
-ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl"
+ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pam pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl redis"
 ARG PHP_EXTENSIONS
-ARG APT_PACKAGES="acl cron sudo procps gettext tini mkcert p7zip unzip git nodejs ca-certificates curl gnupg"
-ARG DEBIAN_CODENAME=bullseye
+ARG APT_PACKAGES="acl cron sudo procps gettext tini mkcert p7zip unzip git nodejs ca-certificates curl gnupg libpam0g-dev"
+ARG DEBIAN_CODENAME=trixie
 ARG INSTALL_PHP_EXTENSION_URL='https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions'
 
 #
@@ -25,19 +25,19 @@ ARG COMPOSER_VERSION
 ARG SYMFONY_VERSION
 ARG NODE_MAJOR
 ARG INSTALL_PHP_EXTENSION_URL
-ENV INSTALL_PHP_EXTENSION_URL "${INSTALL_PHP_EXTENSION_URL}"
-ENV PHP_EXTENSIONS "${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
-ENV DOCUMENT_ROOT /srv/app/public
-ENV SYMFONY_CLI_URL "https://github.com/symfony-cli/symfony-cli/releases/download/v${SYMFONY_VERSION}/symfony-cli_linux_amd64.tar.gz"
-ENV APT_PACKAGES "${APT_PACKAGES}"
-ENV COMPOSER_VERSION "${COMPOSER_VERSION}"
+ENV INSTALL_PHP_EXTENSION_URL="${INSTALL_PHP_EXTENSION_URL}"
+ENV PHP_EXTENSIONS="${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
+ENV DOCUMENT_ROOT=/srv/app/public
+ENV SYMFONY_CLI_URL="https://github.com/symfony-cli/symfony-cli/releases/download/v${SYMFONY_VERSION}/symfony-cli_linux_amd64.tar.gz"
+ENV APT_PACKAGES="${APT_PACKAGES}"
+ENV COMPOSER_VERSION="${COMPOSER_VERSION}"
 
 # update and install
 RUN set -eux ; \
-	mkdir /etc/apt/keyrings/ ; \
+	mkdir -p /etc/apt/keyrings/ ; \
 	apt-get update ; \
 	apt-get install -y ca-certificates curl gnupg ; \
-	echo 'deb http://deb.debian.org/debian bullseye-backports main contrib non-free' > /etc/apt/sources.list.d/backports.list ; \
+	echo 'deb http://deb.debian.org/debian trixie-backports main contrib non-free' > /etc/apt/sources.list.d/backports.list ; \
 	echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" > /etc/apt/sources.list.d/nodesource.list ; \
 	(cd /usr/bin && curl -1sLf $SYMFONY_CLI_URL | tar xfz - symfony) ; \
 	curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg ; \
@@ -52,7 +52,6 @@ RUN set -eux ; \
 	curl -sSLf -o '/usr/bin/install-php-extensions' $INSTALL_PHP_EXTENSION_URL ; \
 	chmod +x '/usr/bin/install-php-extensions' ; \
 	install-php-extensions $PHP_EXTENSIONS ; \
-	install-php-extensions redis-^5 ; \
 	true
 
 # install composer
@@ -94,19 +93,19 @@ ARG COMPOSER_VERSION
 ARG SYMFONY_VERSION
 ARG NODE_MAJOR
 ARG INSTALL_PHP_EXTENSION_URL
-ENV INSTALL_PHP_EXTENSION_URL "${INSTALL_PHP_EXTENSION_URL}"
-ENV PHP_EXTENSIONS "${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
-ENV DOCUMENT_ROOT /srv/app/public
-ENV SYMFONY_CLI_URL "https://github.com/symfony-cli/symfony-cli/releases/download/v${SYMFONY_VERSION}/symfony-cli_linux_amd64.tar.gz"
-ENV APT_PACKAGES "${APT_PACKAGES}"
-ENV COMPOSER_VERSION "${COMPOSER_VERSION}"
+ENV INSTALL_PHP_EXTENSION_URL="${INSTALL_PHP_EXTENSION_URL}"
+ENV PHP_EXTENSIONS="${DEFAULT_PHP_EXTENSIONS} ${PHP_EXTENSIONS}"
+ENV DOCUMENT_ROOT=/srv/app/public
+ENV SYMFONY_CLI_URL="https://github.com/symfony-cli/symfony-cli/releases/download/v${SYMFONY_VERSION}/symfony-cli_linux_amd64.tar.gz"
+ENV APT_PACKAGES="${APT_PACKAGES}"
+ENV COMPOSER_VERSION="${COMPOSER_VERSION}"
 
 # update and install
 RUN set -eux ; \
-	mkdir /etc/apt/keyrings/ ; \
+	mkdir -p /etc/apt/keyrings/ ; \
 	apt-get update ; \
 	apt-get install -y ca-certificates curl gnupg ; \
-	echo 'deb http://deb.debian.org/debian bullseye-backports main contrib non-free' > /etc/apt/sources.list.d/backports.list ; \
+	echo 'deb http://deb.debian.org/debian trixie-backports main contrib non-free' > /etc/apt/sources.list.d/backports.list ; \
 	echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" > /etc/apt/sources.list.d/nodesource.list ; \
 	(cd /usr/bin && curl -1sLf $SYMFONY_CLI_URL | tar xfz - symfony) ; \
 	curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg ; \
@@ -121,7 +120,6 @@ RUN set -eux ; \
 	curl -sSLf -o '/usr/bin/install-php-extensions' $INSTALL_PHP_EXTENSION_URL ; \
 	chmod +x '/usr/bin/install-php-extensions' ; \
 	install-php-extensions $PHP_EXTENSIONS ; \
-	install-php-extensions redis-^5 ; \
 	true
 
 # install composer
