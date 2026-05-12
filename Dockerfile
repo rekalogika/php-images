@@ -1,7 +1,7 @@
-ARG PHP_VERSION=8.4.21
+ARG PHP_VERSION=8.5.6
 ARG COMPOSER_VERSION=2.9.7
 ARG SYMFONY_VERSION=5.17.1
-ARG NODE_MAJOR=20
+ARG NODE_MAJOR=24
 ARG DEFAULT_PHP_EXTENSIONS="bcmath exif gd intl opcache pam pcntl pdo_pgsql pdo_mysql sockets sysvmsg sysvsem sysvshm zip amqp xsl redis"
 ARG PHP_EXTENSIONS
 ARG APT_PACKAGES="acl cron sudo procps gettext tini mkcert p7zip unzip git nodejs ca-certificates curl gnupg libpam0g-dev"
